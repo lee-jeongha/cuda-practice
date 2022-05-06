@@ -8,7 +8,7 @@ __global__ void AplusB(int *ret, int a, int b) {
 }
 
 int main(){
-	/*
+	#if 0
 	int *ret;
 	cudaMalloc(&ret, 1000*sizeof(int));
 	AplusB<<< 1, 1000 >>>(ret, 10, 100);
@@ -19,8 +19,9 @@ int main(){
 	free(host_rest);
 	cudaFree(ret);
 	return 0;
-	*/
-
+	#endif
+	
+	#if 1
 	int *ret;
 	cudaMallocManaged(&ret, 1000*sizeof(int));
 	AplusB<<< 1, 1000 >>>(ret, 10, 100);
@@ -29,4 +30,5 @@ int main(){
 		printf("%d: A+B = %d\n", i, ret[i]);
 	cudaFree(ret);
 	return 0;
+	#endif
 }
